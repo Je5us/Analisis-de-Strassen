@@ -1,4 +1,5 @@
 #include "multiplicacion_estandar.h"
+#include "strassen.h"
 
 int main(){
 	int A[N][N] = {{1,0,0},{0,1,0},{0,0,1}};
