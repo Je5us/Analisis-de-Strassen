@@ -100,7 +100,7 @@ void strassen(int** A, int** B, int** C, int n){
 
 	//P3 = (c + d)*e
 	suma(c, d, T1, k);
-	strassen(T2, e, P3, k);
+	strassen(T1, e, P3, k);
 
 	//P4 = d*(g - e)
 	resta(g, e, T1, k);
@@ -130,8 +130,8 @@ void strassen(int** A, int** B, int** C, int n){
 	//Calculo para los Cuadrantes:
 	//r = P5 + P4 - P2 + P6
 	suma(P5, P4, T1, k);
-	suma(P2, P6, T2, k);
-	resta(T1, T2, r, k);
+	resta(T1, P2, T2, k);
+	suma(T2, P6, r, k);
 
 	//s = P1 + P2
 	suma(P1, P2, s, k);
@@ -139,15 +139,15 @@ void strassen(int** A, int** B, int** C, int n){
 	//t = P3 + P4
 	suma(P3, P4, t, k);
 
-	//u = P5 + P1 - P3 - P7 = (P5 + P1) - (P3 + P7)
+	//u = P5 + P1 - P3 - P7
 	suma(P5, P1, T1, k);
-	suma(P3, P7, T2, k);
-	resta(T1, T2, u, k);
+	resta(T1, P3, T2, k);
+	resta(T2, P7, u, k);
 	//combinar los cuadrantes en al matriz C
 	combinar(C, r, 0, 0, k);
-	combinar(C, s, 0, 0, k);
-	combinar(C, t, 0, 0, k);
-	combinar(C, u, 0, 0, k);
+	combinar(C, s, 0, k, k);
+	combinar(C, t, k, 0, k);
+	combinar(C, u, k, k, k);
 	
 	//liberar las sub-matrices
 	liberar_matriz(a,k);

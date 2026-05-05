@@ -1,5 +1,6 @@
 #include "multiplicacion_estandar.h"
 #include "strassen.h"
+#include "stdio.h"
 
 int main() {
 	int n = 4; 
@@ -18,12 +19,13 @@ int main() {
 
 	multiplicacion_estandar(A, B, C, n);
 	mostrar(C, n);
-
+	printf("Strassen: \n");
     strassen(A, B, D, n);
 	mostrar(D, n);
-
+	
     liberar_matriz(A, n);
     liberar_matriz(B, n);
+	liberar_matriz(C, n);
     liberar_matriz(D, n);
 
     return 0;
