@@ -1,12 +1,30 @@
 #include "multiplicacion_estandar.h"
 #include "strassen.h"
 
-int main(){
+int main() {
+	int n = 4; 
+
+    int **A = crear_matriz(n);
+    int **B = crear_matriz(n);
+	int **C = crear_matriz(n);
+    int **D = crear_matriz(n);
 	
-	int A[N][N] = {{1,0,0},{0,1,0},{0,0,1}};
-	int B[N][N] = {{1,2,3},{4,5,6},{7,8,9,}};
-	int C[N][N] = {0};
-	multiplicacion_estandar(A, B, C);
-	mostrar(C);
-	return 0;
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < n; j++){
+			A[i][j] = i * n + j;
+			B[i][j] = i * n + j;
+		}
+	}
+
+	multiplicacion_estandar(A, B, C, n);
+	mostrar(C, n);
+
+    strassen(A, B, D, n);
+	mostrar(D, n);
+
+    liberar_matriz(A, n);
+    liberar_matriz(B, n);
+    liberar_matriz(D, n);
+
+    return 0;
 }
