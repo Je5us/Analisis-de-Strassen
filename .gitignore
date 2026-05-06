@@ -57,6 +57,8 @@ dkms.conf
 # Archivos temporales de Vim
 *.swp
 *.swo
+*.dat
 
 # Ejecutables
+*.dat
 programa
