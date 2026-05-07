@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define REPETICIONES 10
+
 static long long elapsedNanoseconds(struct timespec start, struct timespec end) {
     long long seconds = (long long)(end.tv_sec - start.tv_sec);
     long long nanoseconds = (long long)(end.tv_nsec - start.tv_nsec);
@@ -46,24 +48,29 @@ int main() {
 	srand((unsigned int)time(NULL));
 	printf("#n\tEstandar\tStrassen:\n");
 	
-	for(int n = 2; n <= 512; n *= 2){ 
+	for(int n = 2; n <= 512; n *= 2){
+		double estandar_acumulado = 0;
+		double strassen_acumulado = 0;
+
     	int **A = crear_matriz(n);
     	int **B = crear_matriz(n);
 		int **C = crear_matriz(n);
     	int **D = crear_matriz(n);
+		for(int i = 0; i < REPETICIONES; i++){
 
-		generar_matriz_aleatoria(A, n, 1000);
-		generar_matriz_aleatoria(B, n, 1000);
+			generar_matriz_aleatoria(A, n, 1000);
+			generar_matriz_aleatoria(B, n, 1000);
 	
-		double Estandartime = medicion_estandard(A, B, C, n);
-		double Strassentime = medicion_strassen(A, B, D, n);
+			estandar_acumulado += medicion_estandard(A, B, C, n);
+			strassen_acumulado += medicion_strassen(A, B, D, n);
 
-		printf("%d\t%.3f\t%.3f\n", n, Estandartime, Strassentime);
-
+		}
+		
 		liberar_matriz(A, n);
 		liberar_matriz(B, n);
 		liberar_matriz(C, n);
 		liberar_matriz(D, n);
+		printf("%d\t%.3f\t%.3f\n", n, estandar_acumulado / REPETICIONES, strassen_acumulado / REPETICIONES);
 	}
 	return 0;
 }
