@@ -26,8 +26,11 @@ plot: $(TARGET)
 	            set grid; \
 	            set logscale y; \
 	            set logscale x 2; \
-	            set arrow from 32, graph 0 to 32, graph 1 nohead lc rgb 'red' dt 2; \
-	            set label 'n_0 ≈ 32' at 32, graph 0.9 offset 1,0 tc rgb 'red'; \
+				set key bottom right; \
+	            set style line 1 lc rgb '#8b1a4e' lt 1 lw 2 pt 7 ps 1.5; \
+	            set style line 2 lc rgb '#5e9c76' lt 1 lw 2 pt 5 ps 1.5; \
+	            set arrow from 48, graph 0 to 48, graph 1 nohead lc rgb 'blue' dt 3; \
+	            set label 'n_0 empírico ≈ 48' at 48, graph 0.1 offset 1,0 tc rgb 'blue'; \
 	            plot '$(DATA)' using 1:2 with linespoints lw 2 title 'Estandar', \
 	                 '$(DATA)' using 1:3 with linespoints lw 2 title 'Strassen'; \
 	            pause mouse close"

@@ -48,7 +48,7 @@ int main() {
 	srand((unsigned int)time(NULL));
 	printf("#n\tEstandar\tStrassen:\n");
 	
-	for(int n = 2; n <= 512; n *= 2){
+	for(int n = 2; n <= 1024; n *= 2){
 		double estandar_acumulado = 0;
 		double strassen_acumulado = 0;
 

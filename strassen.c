@@ -1,4 +1,5 @@
 #include "strassen.h"
+#include "multiplicacion_estandar.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -49,8 +50,8 @@ void combinar(int** matriz, int** submatriz, int fila_inicio, int columna_inicio
 }
 
 void strassen(int** A, int** B, int** C, int n){
-	if(n == 1){
-		C[0][0] = A[0][0] * B[0][0];
+	if(n <= 64){
+		multiplicacion_estandar(A, B, C, n);
 		return;
 	}
 	int k = n/2;
